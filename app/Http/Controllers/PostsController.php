@@ -14,7 +14,9 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::latest()->get();
+        $posts = Post::latest()
+            ->filter(request(['month', 'year']))
+            ->get();
 
         return view('posts.index', compact('posts'));
     }
@@ -42,12 +44,18 @@ class PostsController extends Controller
             'body' => 'required|min:100'
         ]);
 
+        $user = auth()->user();
+
         $post = new Post();
         $post->title = $request->title;
-        $post->slug = str_slug($request->title);
+        $post->slug = str_slug($request->title).'-'.substr(md5($user->email.':'.time()),0,6);
         $post->body = $request->body;
         $post->user_id = auth()->id();
         $post->save();
+
+        session()->flash('message', 'Post has been published');
+
+        \Mail::to($user)->send(new \App\Mail\PostPublished($user, $post));
 
         return redirect()->home();
     }
@@ -88,10 +96,16 @@ class PostsController extends Controller
             'body' => 'required|min:100'
         ]);
 
-        $post->title = $request->title;
-        $post->slug = str_slug($request->title);
+        $user = auth()->user();
+
+        if($post->title != $request->title){
+            $post->title = $request->title;
+            $post->slug = str_slug($request->title).'-'.substr(md5($user->email.':'.time()),0,6);
+        }
         $post->body = $request->body;
         $post->update();
+
+        session()->flash('message', 'Post has been updated');
 
         return redirect()->home();
     }
@@ -105,6 +119,8 @@ class PostsController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
+
+        session()->flash('message', 'Post has been deleted');
 
         return redirect()->home();
     }

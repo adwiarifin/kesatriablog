@@ -19,6 +19,13 @@ Route::post('/posts', 'PostsController@store');
 Route::patch('/posts/{post}', 'PostsController@update');
 Route::delete('/posts/{post}', 'PostsController@destroy');
 
+Route::get('/register', 'RegistrationController@create');
+Route::post('/register', 'RegistrationController@store');
+
+Route::get('/thanks', 'PagesController@thanks');
+Route::get('/about', 'PagesController@about');
+Route::get('/contact', 'PagesController@contact');
+
 Route::get('/login', 'SessionController@create');
 Route::post('/login', 'SessionController@store');
 Route::get('/logout', 'SessionController@destroy');

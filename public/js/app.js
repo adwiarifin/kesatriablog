@@ -93,6 +93,10 @@ __webpack_require__(2);
     el: '#app'
 });*/
 
+$(document).ready(function () {
+  $('#flash-message').fadeOut(10000);
+});
+
 /***/ }),
 /* 1 */
 /***/ (function(module, exports) {

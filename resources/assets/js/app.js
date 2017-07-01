@@ -20,3 +20,7 @@ require('./bootstrap');
 /*const app = new Vue({
     el: '#app'
 });*/
+
+$(document).ready(function() {
+	$('#flash-message').fadeOut(10000);
+});
