@@ -12,7 +12,12 @@
 */
 
 Route::get('/', 'PostsController@index')->name('home');
+Route::get('/posts/create', 'PostsController@create');
 Route::get('/posts/{post}', 'PostsController@show');
+Route::get('/posts/{post}/edit', 'PostsController@edit');
+Route::post('/posts', 'PostsController@store');
+Route::patch('/posts/{post}', 'PostsController@update');
+Route::delete('/posts/{post}', 'PostsController@destroy');
 
 Route::get('/login', 'SessionController@create');
 Route::post('/login', 'SessionController@store');

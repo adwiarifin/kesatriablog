@@ -14,7 +14,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::latest()->get();
 
         return view('posts.index', compact('posts'));
     }
@@ -26,7 +26,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-        //
+        return view('posts.create');
     }
 
     /**
@@ -37,7 +37,19 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required|min:3',
+            'body' => 'required|min:100'
+        ]);
+
+        $post = new Post();
+        $post->title = $request->title;
+        $post->slug = str_slug($request->title);
+        $post->body = $request->body;
+        $post->user_id = auth()->id();
+        $post->save();
+
+        return redirect()->home();
     }
 
     /**
@@ -59,7 +71,7 @@ class PostsController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('posts.edit', compact('post'));
     }
 
     /**
@@ -71,7 +83,17 @@ class PostsController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required|min:3',
+            'body' => 'required|min:100'
+        ]);
+
+        $post->title = $request->title;
+        $post->slug = str_slug($request->title);
+        $post->body = $request->body;
+        $post->update();
+
+        return redirect()->home();
     }
 
     /**
@@ -82,6 +104,8 @@ class PostsController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+
+        return redirect()->home();
     }
 }

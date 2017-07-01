@@ -16,7 +16,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown02">
-                            <a class="dropdown-item" href="{{ url('/posts/create') }}">Make a Post</a>
+                            <a class="dropdown-item" href="{{ url('/posts/create') }}">Create a Post</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ url('/logout') }}">Logout</a>
                         </div>
