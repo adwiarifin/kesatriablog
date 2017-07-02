@@ -19,6 +19,8 @@ Route::post('/posts', 'PostsController@store');
 Route::patch('/posts/{post}', 'PostsController@update');
 Route::delete('/posts/{post}', 'PostsController@destroy');
 
+Route::get('/posts/tags/{tag}', 'TagsController@show');
+
 Route::get('/register', 'RegistrationController@create');
 Route::post('/register', 'RegistrationController@store');
 

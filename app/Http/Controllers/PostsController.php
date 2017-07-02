@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Tag;
 use App\Post;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,8 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::latest()
+        $posts = Post::with('tags')
+            ->latest()
             ->filter(request(['month', 'year']))
             ->get();
 
@@ -53,9 +55,18 @@ class PostsController extends Controller
         $post->user_id = auth()->id();
         $post->save();
 
+        if(!empty($request->tag)){
+            $exp = explode(' ', $request->tag);
+            foreach($exp as $data){
+                $tag = Tag::where('name', '=', $data)->first();
+                if(!$tag){ $tag = Tag::create(['name' => $data]); }
+                $post->tags()->attach($tag);
+            }
+        }
+
         session()->flash('message', 'Post has been published');
 
-        \Mail::to($user)->send(new \App\Mail\PostPublished($user, $post));
+        //\Mail::to($user)->send(new \App\Mail\PostPublished($user, $post));
 
         return redirect()->home();
     }
@@ -96,14 +107,22 @@ class PostsController extends Controller
             'body' => 'required|min:100'
         ]);
 
-        $user = auth()->user();
-
         if($post->title != $request->title){
             $post->title = $request->title;
             $post->slug = str_slug($request->title).'-'.substr(md5($user->email.':'.time()),0,6);
         }
         $post->body = $request->body;
         $post->update();
+
+        $post->tags()->detach();
+        if(!empty($request->tag)){
+            $exp = explode(' ', $request->tag);
+            foreach($exp as $data){
+                $tag = Tag::where('name', '=', $data)->first();
+                if(!$tag){ $tag = Tag::create(['name' => $data]); }
+                $post->tags()->attach($tag);
+            }
+        }
 
         session()->flash('message', 'Post has been updated');
 

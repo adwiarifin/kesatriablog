@@ -24,6 +24,11 @@
 		</div>
 
 		<div class="form-group">
+			<label for="tag">Tag</label>
+			<input type="text" name="tag" id="tag" class="form-control" value="{{ old('tag') }}">
+		</div>
+
+		<div class="form-group">
 			<button type="submit" class="btn btn-primary">Publish</button>
 			<a class="btn btn-secondary" href="{{ url()->previous() }}">Back</a>
 		</div>

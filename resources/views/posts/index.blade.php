@@ -5,7 +5,17 @@
     @foreach($posts as $post)
         <div class="blog-post">
             <h2 class="blog-post-title"><a href="{{ url('/posts/'.$post->slug) }}">{{ $post->title }}</a></h2>
-            <p class="blog-post-meta">{{ $post->created_at->toFormattedDateString() }} by <a href="#">{{ $post->user->firstname }}</a></p>
+            <p class="blog-post-meta">
+                {{ $post->created_at->toFormattedDateString() }} 
+                by <a href="#">{{ $post->user->firstname }}</a>
+                @if(count($post->tags) > 0)
+                    Under the tag:
+                    @foreach($post->tags as $tag)
+                        <a href="{{ url('/posts/tags/' . $tag->name) }}">{{ $tag->name }}</a><?php echo $tag != $post->tags->last() ? ", " : ""; ?>
+                    @endforeach
+                @endif
+            </p>
+            
 
             {!! $post->body !!}
         </div>
