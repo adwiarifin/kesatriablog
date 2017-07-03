@@ -12,7 +12,7 @@
     <title>Kesatria Keyboard's Blog</title>
 
     <!-- Custom styles for this template -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('/themes/blog/css/app.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -53,7 +53,7 @@
         </p>
     </footer>
 
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('/themes/blog/js/app.js') }}"></script>
 </body>
 
 </html>
