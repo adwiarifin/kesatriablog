@@ -1,3 +1,4 @@
+{{ Debugbar::startMeasure('render','Time for rendering') }}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -56,6 +57,4 @@
 </body>
 
 </html>
-
-
-
+{{ Debugbar::stopMeasure('render') }}
