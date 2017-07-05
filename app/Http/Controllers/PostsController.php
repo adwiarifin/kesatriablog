@@ -20,7 +20,12 @@ class PostsController extends Controller
             ->filter(request(['month', 'year']))
             ->get();
 
-        return view('posts.index', compact('posts'));
+        $posts = Post::with('tags')
+            ->latest()
+            ->paginate('5');
+
+        //return view('posts.index', compact('posts'));
+        return view('sparkling.posts.index', compact('posts'));
     }
 
     /**
@@ -79,7 +84,7 @@ class PostsController extends Controller
      */
     public function show(Post $post)
     {
-        return view('posts.show', compact('post'));
+        return view('sparkling.posts.show', compact('post'));
     }
 
     /**
