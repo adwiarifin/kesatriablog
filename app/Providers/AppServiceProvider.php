@@ -16,6 +16,12 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('layouts.sidebar', function($view) {
             $view->with('archives', \App\Post::archives());
         });
+
+        view()->composer('sparkling.sidebar', function($view) {
+            $view->with('recents', \App\Post::latest()->limit(3)->get()); 
+            $view->with('archives', \App\Post::archives()); 
+            $view->with('tags', \App\Tag::all());
+        });
     }
 
     /**
