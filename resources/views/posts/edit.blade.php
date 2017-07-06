@@ -15,13 +15,18 @@
 		
 		<div class="form-group">
 			<label for="title">Title</label>
-			<input type="text" name="title" id="title" class="form-control" value="{{ $post->title }}">
+			<input type="text" name="title" id="title" class="form-control" value="{{ old('title', $post->title) }}">
 		</div>
 
 		<div class="form-group">
 			<label for="body">Body</label>
-			<textarea id="body" name="body" class="form-control">{{ $post->body }}</textarea>
+			<textarea id="body" name="body" class="form-control">{{ old('body', $post->body) }}</textarea>
 			@ckeditor('body')
+		</div>
+
+		<div class="form-group">
+			<label for="tag">Tag</label>
+			<input type="text" name="tag" id="tag" class="form-control" value="{{ old('tag', implode(', ', $post->tags->pluck(['name'])->toArray())) }}">
 		</div>
 
 		<div class="form-group">
