@@ -233,4 +233,6 @@ return [
 
     ],
 
+    ///////  Ditambahkan sendiri  /////////
+    'theme' => 'sparkling',
 ];

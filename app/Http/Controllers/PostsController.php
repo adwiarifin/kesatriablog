@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class PostsController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +26,7 @@ class PostsController extends Controller
             ->paginate('5');
 
         //return view('posts.index', compact('posts'));
-        return view('sparkling.posts.index', compact('posts'));
+        return view(config('app.theme').'.posts.index', compact('posts'));
     }
 
     /**
@@ -35,7 +36,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        return view(config('app.theme').'posts.create');
     }
 
     /**
@@ -84,7 +85,7 @@ class PostsController extends Controller
      */
     public function show(Post $post)
     {
-        return view('sparkling.posts.show', compact('post'));
+        return view(config('app.theme').'.posts.show', compact('post'));
     }
 
     /**
@@ -95,7 +96,7 @@ class PostsController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('posts.edit', compact('post'));
+        return view(config('app.theme').'.posts.edit', compact('post'));
     }
 
     /**
