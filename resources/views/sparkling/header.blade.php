@@ -11,17 +11,45 @@
 								<span class="icon-bar"></span>
 							</button>
                             
-                                <div id="logo">
-                                    <h1 class="site-name"> <a class="navbar-brand" href="https://colorlib.com/sparkling/" title="Sparkling" rel="home">Sparkling</a>
-                                    </h1>
-                                </div><!-- end of #logo -->
+                            <div id="logo">
+                                <h1 class="site-name"> <a class="navbar-brand" href="{{ url('/') }}" title="Sparkling" rel="home">Kesatria's Blog</a>
+                                </h1>
+                            </div><!-- end of #logo -->
 
                             </div>
                             <div class="collapse navbar-collapse navbar-ex1-collapse">
                                 <ul id="menu-top" class="nav navbar-nav">
-                                    <li id="menu-item-1773" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-1773 active"><a title="Home" href="https://colorlib.com/sparkling/">Home</a></li>
-                                    <li id="menu-item-1800" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1800"><a title="Download" href="https://colorlib.com/wp/themes/sparkling/">Download</a></li>
-                                    <li id="menu-item-2024" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2024"><a title="Gallery" href="https://colorlib.com/sparkling/gallery/">Gallery</a></li>
+                                    <li class="menu-item active">
+                                        <a href="{{ url('/') }}">Home <span class="sr-only">(current)</span></a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="{{ url('/about') }}">About</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="{{ url('/contact') }}">Contact</a>
+                                    </li>
+                                    @if(Auth::check())
+                                    <li class="menu-item dropdown">
+                                        <a class="dropdown-toggle" href="#" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> {{ Auth::user()->firstname }} {{ Auth::user()->lastname }} <span class="caret"></a>
+                                        <ul role="menu" class=" dropdown-menu">
+                                            <li class="menu-item"><a href="{{ url('/posts/create') }}"><span class="glyphicon glyphicon-file"></span> Create a Post</a></li>
+                                            <li class="divider" role="presentation"></li>
+                                            <li class="menu-item"><a title="Logout" href="{{ url('/logout') }}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                                        </ul>
+                                    </li>
+                                    @else
+                                    <li class="menu-item"><a href="{{ url('/login') }}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                                    @endif
+
+                                    <!--li id="menu-item-1773" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-1773 active">
+                                        <a title="Home" href="https://colorlib.com/sparkling/">Home</a>
+                                    </li>
+                                    <li id="menu-item-1800" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1800">
+                                        <a title="Download" href="https://colorlib.com/wp/themes/sparkling/">Download</a>
+                                    </li>
+                                    <li id="menu-item-2024" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2024">
+                                        <a title="Gallery" href="https://colorlib.com/sparkling/gallery/">Gallery</a>
+                                    </li>
                                     <li id="menu-item-1911" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1911"><a title="Shortcodes" href="https://colorlib.com/sparkling/sparkling-shortcodes/">Shortcodes</a></li>
                                     <li id="menu-item-1774" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1774 dropdown"><a title="About" href="#" data-toggle="dropdown" class="dropdown-toggle">About <span class="caret"></span></a>
                                         <ul role="menu" class=" dropdown-menu">
@@ -39,7 +67,7 @@
                                             <li role="presentation" class="disabled"><a href="#">This item is disabled</a></li>
                                         </ul>
                                     </li>
-                                    <li id="menu-item-2049" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2049"><a title="Shop" href="https://colorlib.com/sparkling/shop/"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;Shop</a></li>
+                                    <li id="menu-item-2049" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2049"><a title="Shop" href="https://colorlib.com/sparkling/shop/"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;Shop</a></li-->
                                 </ul>
                             </div>
                         </div>
