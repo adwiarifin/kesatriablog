@@ -12,7 +12,7 @@
 							                <div class="entry-meta">
 							                    <span class="posted-on"><i class="fa fa-calendar"></i> <a href="{{ url('/posts/'.$post->slug) }}" rel="bookmark"><time class="entry-date published" datetime="{{ $post->created_at->toAtomString() }}">{{ $post->created_at->toFormattedDateString() }}</time><time class="updated" datetime="{{ $post->updated_at->toAtomString() }}">{{ $post->updated_at->toFormattedDateString() }}</time></a></span><span class="byline"> <i class="fa fa-user"></i> <span class="author vcard"><a class="url fn n" href="{{ url('/posts/users/'.$post->user->id) }}">{{ $post->user->firstname }}</a></span></span>
 							                    @if(count($post->tags) > 0)
-							                    <span class="cat-links"><i class="fa fa-folder-open-o"></i>
+							                    <span class="cat-links"><i class="fa fa-tags"></i>
 								                    @foreach($post->tags as $tag)
 								                        <a href="{{ url('/posts/tags/' . $tag->name) }}" rel="category tag">{{ $tag->name }}</a>{{ $tag != $post->tags->last() ? ", " : "" }}
 								                    @endforeach
