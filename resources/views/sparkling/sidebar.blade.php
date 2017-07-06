@@ -39,7 +39,7 @@
                                         <!-- image -->
                                         <div class="post-image ">
                                             <a href="{{ url('posts/'.$post->slug) }}">
-                                                <img width="60" height="60" src="http://via.placeholder.com/60x60" />
+                                                <!--img width="60" height="60" src="http://via.placeholder.com/60x60" /-->
                                             </a>
                                         </div><!-- end post image -->
 
